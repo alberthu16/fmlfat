@@ -1,0 +1,10 @@
+{
+    "title":"controls",
+    "id":"controls.project.kinoma.marvell.com",
+    "tags":[
+        "uiSample"
+    ],
+    "Create":{
+        "main":"src/main"
+    },
+}
