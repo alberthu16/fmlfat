@@ -28,7 +28,7 @@ var foodCalorieIndex = {
 	};
 
 var userSelectedFood;
-var numCaloriesWanted;
+var numCaloriesWanted ;
 var currInput;
 var finalQuantity = 0;
 /**quantity control.*/
