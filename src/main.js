@@ -51,6 +51,7 @@ let MyRadioGroup = RadioGroup.template($ => ({    top: 20, bottom: 10, left: 20
   			trace("currInput 160", currInput);
             	numCaloriesWanted = currInput * foodCalorieIndex[buttonName];
             }
+            application.distribute("numCaloriesWanted", numCaloriesWanted)
 	//		amountText.string = numCaloriesWanted + " calories total";
 			trace("calories wanted: " + numCaloriesWanted + "\n");
 	//		amountText.string = numCaloriesWanted;
@@ -74,6 +75,7 @@ let addButtonTemplate = Button.template($ => ({
 	Behavior: class extends ButtonBehavior {
 		onTap(button) {
 			trace("button tapped\n");
+			let secondPage = new mainSecond({ tableOfFood });
 			application.remove(firstScreen);
 			application.add(secondPage);
 		}
@@ -121,4 +123,4 @@ let tableOfFood = new Column({    top: 0, left: 0, right: 0,    contents: [  
             	new Text({ top: 20, bottom: 0, left: 50, right: 150, string: color[2] }), //quantity                new Text({ top: 20, bottom: 0, left: 150, right: 50, string: color[1] }) //item name            ]
              })),    ]})
 
-let secondPage = new mainSecond({ tableOfFood });
+
