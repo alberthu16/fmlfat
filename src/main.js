@@ -29,6 +29,7 @@ var foodCalorieIndex = {
 
 var userSelectedFood;
 var numCaloriesWanted;
+var tableOfFood;
 var currInput;
 var finalQuantity = 0;
 /**quantity control.*/
@@ -48,10 +49,9 @@ let MyRadioGroup = RadioGroup.template($ => ({    top: 20, bottom: 10, left: 20
             userSelectedFood = buttonName;
             numCaloriesWanted = foodCalorieIndex[buttonName];
             if (currInput != null) {
-  			trace("currInput 160", currInput);
+  				trace("currInput 160 " + currInput + "\n");
             	numCaloriesWanted = currInput * foodCalorieIndex[buttonName];
             }
-            application.distribute("numCaloriesWanted", numCaloriesWanted)
 	//		amountText.string = numCaloriesWanted + " calories total";
 			trace("calories wanted: " + numCaloriesWanted + "\n");
 	//		amountText.string = numCaloriesWanted;
@@ -62,9 +62,11 @@ let MyRadioGroup = RadioGroup.template($ => ({    top: 20, bottom: 10, left: 20
 /**slider screen*//**let graySkin = new Skin({ fill: "gray" });let mainContainer = new Container({    left: 0, right: 0, top: 0, bottom: 0,    contents: [        //new MySlider({ min: 0, max: 10, value: 5 }),        //amountText    ]});*/
 
 /**make scrollable*/
-let scrollContainer = Container.template($ => ({    left: 0, right: 0, top: 0, bottom: 0,    contents: [        VerticalScroller($, {            active: true, top: 25, bottom: 0,            contents: [                $.pickAndChoose,            ]        }),        new Container({            top: 0, height: 0, left: 0, right: 0,            contents: [                new Label({ string: "Vertical Scroller Example" }),            ]        })    ],
+let scrollContainer = Container.template($ => ({    left: 0, right: 0, top: 0, bottom: 0,    contents: [        VerticalScroller($, {            active: true, top: 25, bottom: 0,            contents: [                $.pickAndChoose,                VerticalScrollbar(),            ]        }),        new Container({            top: 0, height: 0, left: 0, right: 0,            contents: [                new Label({ string: "Vertical Scroller Example" }),            ]        })    ],
     Behavior: class extends Behavior {        onTouchEnded(content) {            SystemKeyboard.hide();            content.focus();        }    }}));
 
+//table goes here
+let darkGraySkin = new Skin({ fill: "#202020" });let titleStyle = new Style({ font: "20px", color: "white" });let mainSecond = Container.template($ => ({    left: 0, right: 0, top: 0, bottom: 0,    contents: [        VerticalScroller($, {            active: true, top: 25, bottom: 0,            contents: [                $.tableOfFood,            ]        }),        new Container({            top: 0, height: 25, left: 0, right: 0, skin: darkGraySkin,            style: titleStyle,            contents: [                new Label({ string: numCaloriesWanted }),            ]        })    ]}));
 
 /*button stuff*/
 let addButtonTemplate = Button.template($ => ({
@@ -75,7 +77,21 @@ let addButtonTemplate = Button.template($ => ({
 	Behavior: class extends ButtonBehavior {
 		onTap(button) {
 			trace("button tapped\n");
-			let secondPage = new mainSecond({ tableOfFood });
+			tableOfFood = new Column({			    top: 0, left: 0, right: 0,			    contents: [			        [['#1ACC45', 'Plate of Spaghetti', numCaloriesWanted / foodCalorieIndex['Plate of Spaghetti']],
+			        ['#79FFBF', 'Banana', numCaloriesWanted / foodCalorieIndex['Banana']],
+			        ['#FF6F3A', 'Pop Tart', numCaloriesWanted / foodCalorieIndex['Pop Tart']],
+			        ['#998060', 'Big Mac', numCaloriesWanted / foodCalorieIndex['Big Mac']],
+			        ['#CC7E1A', 'Medium Fries', numCaloriesWanted / foodCalorieIndex['Medium Fries']],
+			        ['#1ACC45', 'Taco', numCaloriesWanted / foodCalorieIndex['Taco']],
+			        ['#79FFBF', 'Slice of bread', numCaloriesWanted / foodCalorieIndex['Slice of bread']],
+			        ['#FF6F3A','Chocolate Cake', numCaloriesWanted / foodCalorieIndex['Chocolate Cake']],
+			        ['#998060', 'Plate of Pad Thai', numCaloriesWanted / foodCalorieIndex['Plate of Pad Thai']],
+			        ['#CC7E1A', 'IHOP Chorizo Fiesta Omelette', numCaloriesWanted / foodCalorieIndex['IHOP Chorizo Fiesta Omelette']],
+			        ['#1ACC45', 'Harmless Coconut Water (1 bottle)', numCaloriesWanted / foodCalorieIndex['Harmless Coconut Water (1 bottle)']],			        ['#79FFBF', 'Boba milk tea with grass jelly', numCaloriesWanted / foodCalorieIndex['Boba milk tea with grass jelly']],			        ['#FF6F3A', 'Cup of black coffee', numCaloriesWanted / foodCalorieIndex['Cup of black offee']],			        ['#998060', 'Grande Caramel Frappuccino', numCaloriesWanted / foodCalorieIndex['Grande Caramel Frappuccino']],].map(color => 			            new Container({ top: 0, height: 60, left: 0, right: 0,			            skin: new Skin({ fill: color[0] }),
+			            contents: [
+			            	new Text({ top: 20, bottom: 0, left: 50, right: 150, string: color[2] }), //quantity			                new Text({ top: 20, bottom: 0, left: 150, right: 50, string: color[1] }) //item name			            ]
+			             })),			    ]			});
+			var secondPage = new mainSecond({ tableOfFood });
 			application.remove(firstScreen);
 			application.add(secondPage);
 		}
@@ -104,23 +120,5 @@ var amountText = new Text({	height: 25, width: 100,
 	]
 });*/
 //application.add(resultDisplay);
-
-//table goes here
-let darkGraySkin = new Skin({ fill: "#202020" });let titleStyle = new Style({ font: "20px", color: "white" });let mainSecond = Container.template($ => ({    left: 0, right: 0, top: 0, bottom: 0,    contents: [        VerticalScroller($, {            active: true, top: 25, bottom: 0,            contents: [                $.tableOfFood,            ]        }),        new Container({            top: 0, height: 25, left: 0, right: 0, skin: darkGraySkin,            style: titleStyle,            contents: [                new Label({ string: numCaloriesWanted + "calories total" }),            ]        })    ]}));
-
-let tableOfFood = new Column({    top: 0, left: 0, right: 0,    contents: [        [['#1ACC45', 'Plate of Spaghetti', numCaloriesWanted / foodCalorieIndex['Plate of Spaghetti']],
-        ['#79FFBF', 'Banana', numCaloriesWanted / foodCalorieIndex['Banana']],
-        ['#FF6F3A', 'Pop Tart', numCaloriesWanted / foodCalorieIndex['Pop Tart']],
-        ['#998060', 'Big Mac', numCaloriesWanted / foodCalorieIndex['Big Mac']],
-        ['#CC7E1A', 'Medium Fries', numCaloriesWanted / foodCalorieIndex['Medium Fries']],
-        ['#1ACC45', 'Taco', numCaloriesWanted / foodCalorieIndex['Taco']],
-        ['#79FFBF', 'Slice of bread', numCaloriesWanted / foodCalorieIndex['Slice of bread']],
-        ['#FF6F3A','Chocolate Cake', numCaloriesWanted / foodCalorieIndex['Chocolate Cake']],
-        ['#998060', 'Plate of Pad Thai', numCaloriesWanted / foodCalorieIndex['Plate of Pad Thai']],
-        ['#CC7E1A', 'IHOP Chorizo Fiesta Omelette', numCaloriesWanted / foodCalorieIndex['IHOP Chorizo Fiesta Omelette']],
-        ['#1ACC45', 'Harmless Coconut Water (1 bottle)', numCaloriesWanted / foodCalorieIndex['Harmless Coconut Water (1 bottle)']],        ['#79FFBF', 'Boba milk tea with grass jelly', numCaloriesWanted / foodCalorieIndex['Boba milk tea with grass jelly']],        ['#FF6F3A', 'Cup of black coffee', numCaloriesWanted / foodCalorieIndex['Cup of black offee']],        ['#998060', 'Grande Caramel Frappuccino', numCaloriesWanted / foodCalorieIndex['Grande Caramel Frappuccino']],].map(color =>             new Container({ top: 0, height: 60, left: 0, right: 0,            skin: new Skin({ fill: color[0] }),
-            contents: [
-            	new Text({ top: 20, bottom: 0, left: 50, right: 150, string: color[2] }), //quantity                new Text({ top: 20, bottom: 0, left: 150, right: 50, string: color[1] }) //item name            ]
-             })),    ]})
 
 
