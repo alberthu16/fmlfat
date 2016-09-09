@@ -106,7 +106,7 @@ var amountText = new Text({	height: 25, width: 100,
 //application.add(resultDisplay);
 
 //table goes here
-let darkGraySkin = new Skin({ fill: "#202020" });let titleStyle = new Style({ font: "20px", color: "white" });let mainSecond = Container.template($ => ({    left: 0, right: 0, top: 0, bottom: 0,    contents: [        VerticalScroller($, {            active: true, top: 25, bottom: 0,            contents: [                $.tableOfFood,            ]        }),        new Container({            top: 0, height: 25, left: 0, right: 0, skin: darkGraySkin,            style: titleStyle,            contents: [                new Label({ string: numCaloriesWanted + "calories total" }),            ]        })    ]}));
+let darkGraySkin = new Skin({ fill: "#202020" });let titleStyle = new Style({ font: "20px", color: "white" });let mainSecond = Container.template($ => ({    left: 0, right: 0, top: 0, bottom: 0,    contents: [        VerticalScroller($, {            active: true, top: 25, bottom: 0,            contents: [                $.tableOfFood,            ]        }),        new Container({            top: 0, height: 25, left: 0, right: 0, skin: darkGraySkin,            style: titleStyle,            contents: [                new Label({ string: numCaloriesWanted + " calories total" }),            ]        })    ]}));
 
 let tableOfFood = new Column({    top: 0, left: 0, right: 0,    contents: [        [['#1ACC45', 'Plate of Spaghetti', numCaloriesWanted / foodCalorieIndex['Plate of Spaghetti']],
         ['#79FFBF', 'Banana', numCaloriesWanted / foodCalorieIndex['Banana']],
