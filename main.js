@@ -96,12 +96,13 @@ var resultDisplay = new Column({
 		amountText,
 	]
 });
-application.add(resultDisplay);
+//application.add(resultDisplay);
 
 //table goes here
 let darkGraySkin = new Skin({ fill: "#202020" });let titleStyle = new Style({ font: "20px", color: "white" });let MainContainer = Container.template($ => ({    left: 0, right: 0, top: 0, bottom: 0,    contents: [        VerticalScroller($, {             active: true, top: 25, bottom: 0,            contents: [                $.contentToScrollVertically,                VerticalScrollbar(),                 TopScrollerShadow(),                 BottomScrollerShadow(),                ]                             }),        new Container({             top: 0, height: 25, left: 0, right: 0, skin: darkGraySkin,             style: titleStyle,             contents: [                new Label({ string: amountText.string }),            ]        })    ]}));
 
-let contentToScrollVertically = new Column({     top: 0, left: 0, right: 0,     contents: [        ['#8EA604', '#F5BB00', '#EC9F05', '#D76A03', '#BF3100', '#8EA604', '#F5BB00', '#EC9F05', '#D76A03', '#BF3100', '#8EA604', '#F5BB00', '#EC9F05', '#D76A03'].map(color =>             new Container({ top: 0, height: 120, left: 0, right: 0,             skin: new Skin({ fill: color }) }))    ]})
+let contentToScrollVertically = new Column({     top: 0, left: 0, right: 0,     contents: [        [['#1ACC45', 'Plate of Spaghetti'], ['#79FFBF', 'Banana'], ['#FF6F3A', 'Pop Tart'], ['#998060', 'Big Mac'], ['#CC7E1A', 'Medium Fries'], ['#1ACC45', 'Taco'], ['#79FFBF', 'Slice of bread'], ['#FF6F3A','Chocolate Cake'], ['#998060', 'Plate of Pad Thai'], ['#CC7E1A', 'IHOP Chorizo Fiesta Omelette'], ['#1ACC45', 'Harmless Coconut Water (1 bottle)'], ['#79FFBF', 'Boba milk tea with grass jelly'], ['#FF6F3A', 'Cup of black coffee'], ['#998060', 'Grande Caramel Frappuccino'],].map(color =>             new Container({ top: 0, height: 60, left: 0, right: 0,             skin: new Skin({ fill: color[0] }),
+            contents: [                new Text({ top: 0, bottom: 0, left: 0, right: 0, string: color[1] })            ]
+             })),    ]})
 
-let scrollerExample = new MainContainer({ contentToScrollVertically });application.add(scrollerExample);
-//let MySlider = HorizontalSlider.template($ => ({  //  height: 50, left: 50, right: 50, top: 50,    //Behavior: class extends HorizontalSliderBehavior {      //  onValueChanged(container) {        //	var amount = Math.round(this.data.value)          //  trace("Value is: " + amount + "\n");            //amountText.string = amount;        //}    //}//}));
+let scrollerExample = new MainContainer({ contentToScrollVertically });application.add(scrollerExample);//let MySlider = HorizontalSlider.template($ => ({  //  height: 50, left: 50, right: 50, top: 50,    //Behavior: class extends HorizontalSliderBehavior {      //  onValueChanged(container) {        //	var amount = Math.round(this.data.value)          //  trace("Value is: " + amount + "\n");            //amountText.string = amount;        //}    //}//}));
