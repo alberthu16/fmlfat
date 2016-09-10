@@ -77,17 +77,17 @@ let addButtonTemplate = Button.template($ => ({
 	Behavior: class extends ButtonBehavior {
 		onTap(button) {
 			trace("button tapped\n");
-			tableOfFood = new Column({			    top: 0, left: 0, right: 0,			    contents: [			        [['#1ACC45', 'Plate of Spaghetti', numCaloriesWanted / foodCalorieIndex['Plate of Spaghetti']],
-			        ['#79FFBF', 'Banana', numCaloriesWanted / foodCalorieIndex['Banana']],
-			        ['#FF6F3A', 'Pop Tart', numCaloriesWanted / foodCalorieIndex['Pop Tart']],
-			        ['#998060', 'Big Mac', numCaloriesWanted / foodCalorieIndex['Big Mac']],
-			        ['#CC7E1A', 'Medium Fries', numCaloriesWanted / foodCalorieIndex['Medium Fries']],
-			        ['#1ACC45', 'Taco', numCaloriesWanted / foodCalorieIndex['Taco']],
-			        ['#79FFBF', 'Slice of bread', numCaloriesWanted / foodCalorieIndex['Slice of bread']],
-			        ['#FF6F3A','Chocolate Cake', numCaloriesWanted / foodCalorieIndex['Chocolate Cake']],
-			        ['#998060', 'Plate of Pad Thai', numCaloriesWanted / foodCalorieIndex['Plate of Pad Thai']],
-			        ['#CC7E1A', 'IHOP Chorizo Fiesta Omelette', numCaloriesWanted / foodCalorieIndex['IHOP Chorizo Fiesta Omelette']],
-			        ['#1ACC45', 'Harmless Coconut Water (1 bottle)', numCaloriesWanted / foodCalorieIndex['Harmless Coconut Water (1 bottle)']],			        ['#79FFBF', 'Boba milk tea with grass jelly', numCaloriesWanted / foodCalorieIndex['Boba milk tea with grass jelly']],			        ['#FF6F3A', 'Cup of black coffee', numCaloriesWanted / foodCalorieIndex['Cup of black offee']],			        ['#998060', 'Grande Caramel Frappuccino', numCaloriesWanted / foodCalorieIndex['Grande Caramel Frappuccino']],].map(color => 			            new Container({ top: 0, height: 60, left: 0, right: 0,			            skin: new Skin({ fill: color[0] }),
+			tableOfFood = new Column({			    top: 0, left: 0, right: 0,			    contents: [			        [['#1ACC45', 'Plate of Spaghetti', Math.round(numCaloriesWanted / foodCalorieIndex['Plate of Spaghetti'] * 100)/100],
+			        ['#79FFBF', 'Banana', Math.round(numCaloriesWanted / foodCalorieIndex['Banana']* 100)/100],
+			        ['#FF6F3A', 'Pop Tart', Math.round(numCaloriesWanted / foodCalorieIndex['Pop Tart']* 100)/100],
+			        ['#998060', 'Big Mac', Math.round(numCaloriesWanted / foodCalorieIndex['Big Mac']* 100)/100],
+			        ['#CC7E1A', 'Medium Fries', Math.round(numCaloriesWanted / foodCalorieIndex['Medium Fries']* 100)/100],
+			        ['#1ACC45', 'Taco', Math.round(numCaloriesWanted / foodCalorieIndex['Taco']* 100)/100],
+			        ['#79FFBF', 'Slice of bread', Math.round(numCaloriesWanted / foodCalorieIndex['Slice of bread']* 100)/100],
+			        ['#FF6F3A','Chocolate Cake', Math.round(numCaloriesWanted / foodCalorieIndex['Chocolate Cake']* 100)/100],
+			        ['#998060', 'Plate of Pad Thai', Math.round(numCaloriesWanted / foodCalorieIndex['Plate of Pad Thai']* 100)/100],
+			        ['#CC7E1A', 'IHOP Chorizo Fiesta Omelette', Math.round(numCaloriesWanted / foodCalorieIndex['IHOP Chorizo Fiesta Omelette']* 100)/100],
+			        ['#1ACC45', 'Harmless Coconut Water (1 bottle)', Math.round(numCaloriesWanted / foodCalorieIndex['Harmless Coconut Water (1 bottle)']* 100)/100],			        ['#79FFBF', 'Boba milk tea with grass jelly', Math.round(numCaloriesWanted / foodCalorieIndex['Boba milk tea with grass jelly']* 100)/100],			        ['#FF6F3A', 'Cup of black coffee', Math.round(numCaloriesWanted / foodCalorieIndex['Cup of black offee']* 100)/100],			        ['#998060', 'Grande Caramel Frappuccino', Math.round(numCaloriesWanted / foodCalorieIndex['Grande Caramel Frappuccino'], -2)],].map(color => 			            new Container({ top: 0, height: 60, left: 0, right: 0,			            skin: new Skin({ fill: color[0] }),
 			            contents: [
 			            	new Text({ top: 20, bottom: 0, left: 50, right: 150, string: color[2] }), //quantity			                new Text({ top: 20, bottom: 0, left: 150, right: 50, string: color[1] }) //item name			            ]
 			             })),			    ]			});
