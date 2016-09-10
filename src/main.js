@@ -34,13 +34,7 @@ var currInput;
 var finalQuantity = 0;
 /**quantity control.*/
 let nameInputSkin = new Skin({ borders: { left: 2, right: 2, top: 2, bottom: 2 }, stroke: 'gray' });let fieldStyle = new Style({ color: 'black', font: 'bold 24px', horizontal: 'center',    vertical: 'middle', left: 5, right: 40, top: 5, bottom: 5 });let fieldHintStyle = new Style({ color: '#aaa', font: '20px', horizontal: 'center',    vertical: 'middle', left: 5, right: 5, top: 5, bottom: 5 });let whiteSkin = new Skin({ fill: "white" });let fieldLabelSkin = new Skin({ fill: ['transparent', 'transparent', '#C0C0C0', '#acd473'] });let MyField = Container.template($ => ({    width: 150, height: 72, top: 0, contents: [        Scroller($, {            left: 4, right: 4, top: 4, bottom: 4, active: true,            Behavior: FieldScrollerBehavior, clip: true,            contents: [                Label($, {                    left: 0, top: 0, bottom: 0, skin: fieldLabelSkin,                    style: fieldStyle, anchor: 'NAME',                    editable: true, string: $.name,                    Behavior: class extends FieldLabelBehavior {                        onEdited(label) {                            let data = this.data;                            data.name = label.string;                            label.container.hint.visible = (data.name.length == 0);
-                            currInput = data.name;                            trace("currInput 95:" + currInput+"\n");                        }                    },                }),                Label($, {                    left: 4, right: 4, top: 4, bottom: 4, style: fieldHintStyle,                    string: "Enter quantity", name: "hint"                }),            ]        })    ]}));let quantityTemplate = Container.template($ => ({    left: 0, right: 0, top: 0, bottom: 0,    skin: whiteSkin, active: true,    contents: [        new MyField({name: ""})    ],    Behavior: class extends Behavior {        onTouchEnded(content) {            SystemKeyboard.hide();            content.focus();        }    }}));//let quantityContainer = new quantityTemplate();
-
-/**var amountText = new Text({	height: 25, width: 100,
-	left: 150, right: 40, top: 30,	skin: whiteSkin,	string: 'Hello World'});amountText.name = "amountText"; */
-
-
-//let MySlider = HorizontalSlider.template($ => ({  //  height: 50, left: 50, right: 50, top: 50,    //Behavior: class extends HorizontalSliderBehavior {      //  onValueChanged(container) {        //	var amount = Math.round(this.data.value)          //  trace("Value is: " + amount + "\n");            //amountText.string = amount;        //}    //}//}));/**item radio.*/
+                            currInput = data.name;                            trace("currInput 95:" + currInput+"\n");                        }                    },                }),                Label($, {                    left: 4, right: 4, top: 4, bottom: 4, style: fieldHintStyle,                    string: "Enter quantity", name: "hint"                }),            ]        })    ]}));let quantityTemplate = Container.template($ => ({    left: 0, right: 0, top: 0, bottom: 0,    skin: whiteSkin, active: true,    contents: [        new MyField({name: ""})    ],    Behavior: class extends Behavior {        onTouchEnded(content) {            SystemKeyboard.hide();            content.focus();        }    }}));/**item radio.*/
 let foodRadioStyle = new Style({ color: '#aaa', font: '10px',});
 
 let MyRadioGroup = RadioGroup.template($ => ({    top: 20, bottom: 10, left: 20, right: 50,
@@ -57,16 +51,12 @@ let MyRadioGroup = RadioGroup.template($ => ({    top: 20, bottom: 10, left: 20
 	//		amountText.string = numCaloriesWanted;
 	//		trace("line 164"+ amountText.string + "\n");        }    }}));
 
-
-
-/**slider screen*//**let graySkin = new Skin({ fill: "gray" });let mainContainer = new Container({    left: 0, right: 0, top: 0, bottom: 0,    contents: [        //new MySlider({ min: 0, max: 10, value: 5 }),        //amountText    ]});*/
-
 /**make scrollable*/
 let scrollContainer = Container.template($ => ({    left: 0, right: 0, top: 0, bottom: 0,    contents: [        VerticalScroller($, {            active: true, top: 25, bottom: 0,            contents: [                $.pickAndChoose,                VerticalScrollbar(),            ]        }),        new Container({            top: 0, height: 0, left: 0, right: 0,            contents: [                new Label({ string: "Vertical Scroller Example" }),            ]        })    ],
     Behavior: class extends Behavior {        onTouchEnded(content) {            SystemKeyboard.hide();            content.focus();        }    }}));
 
 //table goes here
-let darkGraySkin = new Skin({ fill: "#202020" });let titleStyle = new Style({ font: "20px", color: "white" });let mainSecond = Container.template($ => ({    left: 0, right: 0, top: 0, bottom: 0,    contents: [        VerticalScroller($, {            active: true, top: 25, bottom: 0,            contents: [                $.tableOfFood,            ]        }),        new Container({            top: 0, height: 25, left: 0, right: 0, skin: darkGraySkin,            style: titleStyle,            contents: [                new Label({ string: numCaloriesWanted }),            ]        })    ]}));
+let darkGraySkin = new Skin({ fill: "#202020" });let titleStyle = new Style({ font: "20px", color: "white" });let mainSecond = Container.template($ => ({    left: 0, right: 0, top: 0, bottom: 0,    contents: [        VerticalScroller($, {            active: true, top: 25, bottom: 0,            contents: [                $.tableOfFood,            ]        }),        new Container({            top: 0, height: 25, left: 0, right: 0, skin: darkGraySkin,            style: titleStyle,            contents: [                new Label({ string: numCaloriesWanted + " calories total" }),            ]        })    ]}));
 
 /*button stuff*/
 let addButtonTemplate = Button.template($ => ({
@@ -108,17 +98,4 @@ let pickAndChoose = new Column({    top: 0, left: 0, right: 0,
     	new quantityTemplate(),        new MyRadioGroup({buttonNames: "Plate of Spaghetti,Banana,Pop Tart,Big Mac,Medium Fries,Taco,Slice of bread,Chocolate Cake,Plate of Pad Thai,IHOP Chorizo Fiesta Omelette,Harmless Coconut Water (1 bottle),Boba milk tea with grass jelly,Cup of black coffee,Grande Caramel Frappuccino"}),
         new addButtonTemplate({ textForLabel: "Click Me!" })    ]});
 
-//do not delete!!var firstScreen = new scrollContainer({ pickAndChoose });application.add(firstScreen);
-//starting second screen
-
-
-var amountText = new Text({	height: 25, width: 100,
-	left: 40, right: 40, bottom: 150,	skin: whiteSkin,	string: numCaloriesWanted +' calories total'});amountText.name = "lalala";
-/**var resultDisplay = new Column({
-	contents: [
-		amountText,
-	]
-});*/
-//application.add(resultDisplay);
-
-
+//do not delete!!var firstScreen = new scrollContainer({ pickAndChoose });application.add(firstScreen);
